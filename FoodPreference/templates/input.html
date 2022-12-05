@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My Logistic Regression Model</title>
+	<link rel="stylesheet" href="input.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="  crossorigin="anonymous"></script>
+	<script>
+		function analyzeData() {
+			let Age = $('#Age').val()
+			let Food = $('#Food').val()
+			let Juice = $('#Juice').val()
+			let Dessert = $('#Dessert').val()
+			$.post('/model-api', {
+				'Age': Age,
+				'Food': Food,
+				'Juice': Juice,
+				'Dessert': Dessert,
+			}, function(data) {
+				$('#result').html(data)
+			})
+		}
+	</script>
+</head>
+<body>
+
+<div class="container">
+
+	<center><h1>My Logistic Regression Model</h1></center>
+	<input id="Age" placeholder="Enter Age" type="text" class="form-control" />
+
+	<select id="Food" class="form-control">
+		<option value="Traditional food">Traditional food</option>
+		<option value="Western Food">Western Food</option>
+	</select>
+	<select id="Juice" class="form-control">
+		<option value="Fresh Juice">Fresh Juice</option>
+		<option value="Carbonated drinks">Carbonated drinks</option>
+	</select>
+	<select id="Dessert" class="form-control">
+		<option value="Yes">Yes. I eat dessert</option>
+		<option value="No">No. I do not eat dessert</option>
+	</select>
+	<br />
+	<center>
+		<button onClick="analyzeData();" type="button" class="btn btn-success">Analyze</button>
+	</center>
+	<br />
+	<center>
+		<div id="result"></div>
+	</center>
+
+</div>
+
+</body>
+</html>
